@@ -137,4 +137,3 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textInputEditTextPassword.setText(null);
     }
 }
-//my change
