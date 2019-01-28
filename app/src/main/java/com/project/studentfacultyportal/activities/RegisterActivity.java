@@ -52,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     /**
      * This method is to initialize views
      */
+    //RandomComment
     private void initViews() {
         nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
 
