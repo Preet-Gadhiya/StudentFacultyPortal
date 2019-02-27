@@ -21,6 +21,9 @@
             android:name=".activities.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.BrainTrainerQuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.UsersListActivity"
             android:screenOrientation="portrait" />
     </application>
