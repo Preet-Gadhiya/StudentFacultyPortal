@@ -53,7 +53,6 @@ public class BrainTrainerQuizActivity extends Activity {
             public void onTick(long millisUntilFinished) {
 
                 timerTextView.setText(String.valueOf(millisUntilFinished / 1000) + "s");
-
             }
 
             @Override

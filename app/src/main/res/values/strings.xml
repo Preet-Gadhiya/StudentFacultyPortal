@@ -22,5 +22,6 @@
     <string name="text_hello">Hello,</string>
     <string name="upload_image">Upload Image</string>
     <string name="text_title">Faculty Portal</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>
 
