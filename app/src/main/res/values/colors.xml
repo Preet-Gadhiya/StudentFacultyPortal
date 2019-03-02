@@ -16,6 +16,7 @@
     <color name="pink">#fe104d</color>
     <color name="skyBlue">#09c6df</color>
     <color name="endSkyBlue">#0bcce6</color>
+    <color name="colorGreen">#8BC34A</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>
