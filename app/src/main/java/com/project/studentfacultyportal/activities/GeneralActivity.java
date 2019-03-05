@@ -56,7 +56,7 @@ public class GeneralActivity extends AppCompatActivity implements View.OnClickLi
         Intent i;
         switch (v.getId())
         {
-            case R.id.homeCard : i = new Intent(this,GeneralActivity.class); startActivity(i); break;
+            case R.id.homeCard : i = new Intent(this,WelcomeActivity.class); startActivity(i); break;
             case R.id.documentsCard : i = new Intent(this,DocumentActivity .class); startActivity(i); break;
             case R.id.gamesCard : i = new Intent(this,BrainTrainerQuizActivity.class); startActivity(i); break;
             case R.id.profileCard : i = new Intent(this,ProfileActivity.class); startActivity(i); break;
