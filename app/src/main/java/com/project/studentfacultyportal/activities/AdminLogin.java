@@ -1,12 +1,12 @@
 package com.project.studentfacultyportal.activities;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
@@ -15,9 +15,9 @@ import com.project.studentfacultyportal.R;
 import com.project.studentfacultyportal.helpers.InputValidation;
 import com.project.studentfacultyportal.sql.DatabaseHelper;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminLogin extends AppCompatActivity implements View.OnClickListener {
 
-    private final AppCompatActivity activity = LoginActivity.this;
+    private final AppCompatActivity activity = AdminLogin.this;
 
     private NestedScrollView nestedScrollView;
 
@@ -29,18 +29,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private AppCompatButton appCompatButtonLogin;
 
-    private AppCompatTextView textViewLinkRegister;
-    private AppCompatTextView textViewLinkFacultyLogin;
-    private AppCompatTextView textViewLinkAdminLogin;
-
-
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_admin_login);
         getSupportActionBar().hide();
 
         initViews();
@@ -63,12 +59,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         appCompatButtonLogin = (AppCompatButton) findViewById(R.id.appCompatButtonLogin);
 
-        textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
-        textViewLinkFacultyLogin = (AppCompatTextView) findViewById(R.id.textViewLinkFaculltyLogin);
-        textViewLinkAdminLogin = (AppCompatTextView) findViewById(R.id.textViewLinkAdminLogin);
-
-
-
 
     }
 
@@ -77,10 +67,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
     private void initListeners() {
         appCompatButtonLogin.setOnClickListener(this);
-        textViewLinkRegister.setOnClickListener(this);
-        textViewLinkFacultyLogin.setOnClickListener(this);
-        textViewLinkAdminLogin.setOnClickListener(this);
-
     }
 
     /**
@@ -99,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+       /* switch (v.getId()) {
             case R.id.appCompatButtonLogin:
                 verifyFromSQLite();
                 break;
@@ -108,37 +94,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intentRegister);
                 break;
-            case R.id.textViewLinkFaculltyLogin:
-                Intent intentFaculty = new Intent(getApplicationContext(), FacultyLogin.class);
-                startActivity(intentFaculty);
-                break;
-            case R.id.textViewLinkAdminLogin:
-                Intent intentAdmin = new Intent(getApplicationContext(), AdminLogin.class);
-                startActivity(intentAdmin);
-                break;
-        }
+        }*/
+       verifyFromSQLite();
     }
 
     /**
      * This method is to validate the input text fields and verify login credentials from SQLite
      */
     private void verifyFromSQLite() {
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
-            return;
-        }
 
-
-        if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
-                , textInputEditTextPassword.getText().toString().trim())) {
-
-
-            Intent accountsIntent = new Intent(activity, GeneralActivity.class);
+        if ((textInputEditTextEmail.getText().toString().trim().equals(String.valueOf("admin"))) && (textInputEditTextPassword.getText().toString().trim().equals(String.valueOf("admin")))) {
+            Intent accountsIntent = new Intent(activity, RegisterFaculty.class);
             accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
             startActivity(accountsIntent);
@@ -157,4 +123,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textInputEditTextEmail.setText(null);
         textInputEditTextPassword.setText(null);
     }
+
 }

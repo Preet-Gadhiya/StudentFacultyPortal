@@ -23,5 +23,10 @@
     <string name="upload_image">Upload Image</string>
     <string name="text_title">Faculty Portal</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="faculty_login">Faculty Login</string>
+    <string name="hint_faculty_name">Faculty Name</string>
+    <string name="admin_login">Admin Login</string>
+    <string name="user_login">Student Login</string>
+    <string name="file_upload">File Upload</string>
 </resources>
 
