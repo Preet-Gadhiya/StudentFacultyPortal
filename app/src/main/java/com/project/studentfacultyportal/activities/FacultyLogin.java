@@ -35,7 +35,6 @@ import com.google.firebase.storage.UploadTask;
 import com.project.studentfacultyportal.R;
 import com.project.studentfacultyportal.helpers.InputValidation;
 import com.project.studentfacultyportal.sql.DatabaseHelper;
-import com.project.studentfacultyportal.sql.DatabaseHelperFaculty;
 
 public class FacultyLogin extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,7 +53,7 @@ public class FacultyLogin extends AppCompatActivity implements View.OnClickListe
 
 
     private InputValidation inputValidation;
-    private DatabaseHelperFaculty databaseHelperFaculty;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +101,7 @@ public class FacultyLogin extends AppCompatActivity implements View.OnClickListe
      * This method is to initialize objects to be used
      */
     private void initObjects() {
-        databaseHelperFaculty = new DatabaseHelperFaculty(activity);
+        databaseHelper = new DatabaseHelper(activity);
         inputValidation = new InputValidation(activity);
 
     }
@@ -114,7 +113,7 @@ public class FacultyLogin extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        /*switch (v.getId()) {
             case R.id.appCompatButtonLogin:
                 verifyFromSQLite();
                 break;
@@ -123,14 +122,15 @@ public class FacultyLogin extends AppCompatActivity implements View.OnClickListe
                 Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intentRegister);
                 break;
-        }
+        }*/
+        verifyFromSQLite();
     }
 
     /**
      * This method is to validate the input text fields and verify login credentials from SQLite
      */
     private void verifyFromSQLite() {
-        /*if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
             return;
         }
         if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
@@ -138,13 +138,13 @@ public class FacultyLogin extends AppCompatActivity implements View.OnClickListe
         }
         if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
             return;
-        }*/
+        }
 
 
-       /* if (databaseHelperFaculty.checkUser(textInputEditTextEmail.getText().toString().trim()
-                , textInputEditTextPassword.getText().toString().trim())) {*/
+        if (databaseHelper.checkFaculty(textInputEditTextEmail.getText().toString().trim()
+                , textInputEditTextPassword.getText().toString().trim())) {
 
-        if ((textInputEditTextEmail.getText().toString().trim().equals(String.valueOf("msb"))) && (textInputEditTextPassword.getText().toString().trim().equals(String.valueOf("msb")))) {
+//        if ((textInputEditTextEmail.getText().toString().trim().equals(String.valueOf("msb"))) && (textInputEditTextPassword.getText().toString().trim().equals(String.valueOf("msb")))) {
 
             Intent accountsIntent = new Intent(activity, GeneralFacultyActivity.class);
             accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());

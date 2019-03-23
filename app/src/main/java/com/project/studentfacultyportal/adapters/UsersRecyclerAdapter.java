@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import com.project.studentfacultyportal.R;
 import com.project.studentfacultyportal.model.User;
+//import com.project.studentfacultyportal.model.faculty;
+
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
     public UsersRecyclerAdapter(List<User> listUsers) {
         this.listUsers = listUsers;
     }
+
 
     @Override
     public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
