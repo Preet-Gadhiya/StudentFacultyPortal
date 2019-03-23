@@ -14,9 +14,8 @@ import android.view.View;
 
 import com.project.studentfacultyportal.R;
 import com.project.studentfacultyportal.helpers.InputValidation;
-import com.project.studentfacultyportal.model.faculty;
+import com.project.studentfacultyportal.model.Faculty;
 import com.project.studentfacultyportal.sql.DatabaseHelper;
-import com.project.studentfacultyportal.sql.DatabaseHelperFaculty;
 
 public class RegisterFaculty extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,9 +38,9 @@ public class RegisterFaculty extends AppCompatActivity implements View.OnClickLi
 
 
     private InputValidation inputValidation;
-    private DatabaseHelperFaculty databaseHelper;
+    private DatabaseHelper databaseHelper;
 
-    private faculty faculty;
+    private Faculty faculty;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,8 +91,8 @@ public class RegisterFaculty extends AppCompatActivity implements View.OnClickLi
      */
     private void initObjects() {
         inputValidation = new InputValidation(activity);
-        databaseHelper = new DatabaseHelperFaculty(activity);
-        faculty = new faculty();
+        databaseHelper = new DatabaseHelper(activity);
+        faculty = new Faculty();
 
     }
 
@@ -138,13 +137,13 @@ public class RegisterFaculty extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        if (!databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim())) {
+        if (!databaseHelper.checkFaculty(textInputEditTextEmail.getText().toString().trim())) {
 
             faculty.setName(textInputEditTextName.getText().toString().trim());
             faculty.setEmail(textInputEditTextEmail.getText().toString().trim());
             faculty.setPassword(textInputEditTextPassword.getText().toString().trim());
 
-            databaseHelper.addUser(faculty);
+            databaseHelper.addFaculty(faculty);
 
             // Snack Bar to show success message that record saved successfully
             Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
