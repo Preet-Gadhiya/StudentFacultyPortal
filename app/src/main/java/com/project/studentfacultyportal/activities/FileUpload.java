@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +21,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,6 +37,9 @@ public class FileUpload extends AppCompatActivity {
     TextView notification;
     FirebaseStorage storage;
     FirebaseDatabase database;
+    DatabaseReference reference;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
     Uri pdfUri;
     ProgressDialog progressDialog;
     String fileName = "File_";
@@ -46,7 +53,6 @@ public class FileUpload extends AppCompatActivity {
 
         storage = FirebaseStorage.getInstance();
         database = FirebaseDatabase.getInstance();
-
         selectFile = findViewById(R.id.selectFile);
         uploadFile = findViewById(R.id.uploadFile);
         notification = findViewById(R.id.notification);
@@ -65,8 +71,12 @@ public class FileUpload extends AppCompatActivity {
         uploadFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pdfUri != null)
-                    doUpload(pdfUri);
+                if(pdfUri != null) {
+                    if(user!= null)
+                        doUpload(pdfUri);
+                    else
+                        signInAnonymously();
+                }
                 else
                     Toast.makeText(FileUpload.this, "Select a file", Toast.LENGTH_SHORT).show();
             }
@@ -81,42 +91,61 @@ public class FileUpload extends AppCompatActivity {
         progressDialog.show();
 
         //final String fileName = "File" + String.valueOf(i)  + System.currentTimeMillis()+"";
-        StorageReference storageReference = storage.getReference();
-        storageReference.child("FileUploads").child(fileName).putFile(pdfUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            StorageReference storageReference = storage.getReference();
+            storageReference.child("FileUploads").child(fileName).putFile(pdfUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            String url = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(); // path of file
+                            //Toast.makeText(FileUpload.this, url, Toast.LENGTH_SHORT).show();
+                            DatabaseReference reference = database.getReference().child("urls");
+                            reference.child(fileName).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                        Toast.makeText(FileUpload.this, "File Uploaded Succesfully to database", Toast.LENGTH_SHORT).show();
+                                    else{
+                                        Toast.makeText(FileUpload.this, "File Not Uploaded Succesfully to database", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(FileUpload.this,url,Toast.LENGTH_SHORT);
+                                    }
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                    Toast.makeText(FileUpload.this, "File Uploaded Succesfully", Toast.LENGTH_SHORT).show();
+
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    //tracks progress
+                    int currentProgress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                    progressDialog.setProgress(currentProgress);
+                }
+            });
+
+
+
+    }
+
+    private void signInAnonymously() {
+        mAuth.signInAnonymously().addOnSuccessListener(this, new  OnSuccessListener<AuthResult>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                String url = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(); // path of file
-                DatabaseReference reference = database.getReference();
-                reference.child(fileName).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+            public void onSuccess(AuthResult authResult) {
+                doUpload(pdfUri);
+            }
+        })
+                .addOnFailureListener(this, new OnFailureListener() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
-                            Toast.makeText(FileUpload.this, "File Uploaded Succesfully", Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(FileUpload.this, "File Uploaded Succesfully", Toast.LENGTH_SHORT).show();
-
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(FileUpload.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-                Toast.makeText(FileUpload.this, "File Uploaded Succesfully", Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
-                //tracks progress
-                int currentProgress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                progressDialog.setProgress(currentProgress);
-            }
-        });
-
     }
 
 

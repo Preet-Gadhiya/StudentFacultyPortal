@@ -29,6 +29,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_NAME = "user_name";
     private static final String COLUMN_USER_EMAIL = "user_email";
     private static final String COLUMN_USER_PASSWORD = "user_password";
+    private static final String COLUMN_USER_BRANCH = "user_branch";
+    private static final String COLUMN_USER_SEMESTER = "user_semester";
+    private static final String COLUMN_USER_MOBILE = "user_mobile";
+    private static final String COLUMN_USER_SCORE = "user_score";
+    private static final String COLUMN_USER_TOP_SCORER = "user_top_scorer";
+    private static final String COLUMN_USER_TOTAL_QUIZ = "user_total_quiz";
+
+
+
+
+
+
 
     private static final String COLUMN_FACULTY_ID = "faculty_id";
     private static final String COLUMN_FACULTY_NAME = "faculty_name";
@@ -39,12 +51,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // create table sql query
     private static final String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
-            + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")";
+            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_USER_NAME + " TEXT, "
+            + COLUMN_USER_EMAIL + " TEXT, " + COLUMN_USER_PASSWORD + " TEXT, " + COLUMN_USER_BRANCH + " TEXT, "
+            + COLUMN_USER_SEMESTER + " TEXT, " + COLUMN_USER_MOBILE + " TEXT," + COLUMN_USER_SCORE + " TEXT,"
+            + COLUMN_USER_TOP_SCORER + " TEXT, " + COLUMN_USER_TOTAL_QUIZ + " TEXT " + " )";
 
     private static final String CREATE_FACULTY_TABLE = "CREATE TABLE " + TABLE_FACULTY + "("
-            + COLUMN_FACULTY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_FACULTY_NAME + " TEXT,"
-            + COLUMN_FACULTY_EMAIL + " TEXT," + COLUMN_FACULTY_PASSWORD + " TEXT" + ")";
+            + COLUMN_FACULTY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_FACULTY_NAME + " TEXT, "
+            + COLUMN_FACULTY_EMAIL + " TEXT, " + COLUMN_FACULTY_PASSWORD + " TEXT " + " )";
 
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
@@ -81,6 +95,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_NAME, user.getName());
         values.put(COLUMN_USER_EMAIL, user.getEmail());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        values.put(COLUMN_USER_BRANCH, user.getBranch());
+        values.put(COLUMN_USER_SEMESTER, user.getSemester());
+        values.put(COLUMN_USER_MOBILE,user.getMobile_no());
+        values.put(COLUMN_USER_SCORE,0);
+        values.put(COLUMN_USER_TOP_SCORER,0);
+        values.put(COLUMN_USER_TOTAL_QUIZ,0);
+
 
         // Inserting Row
         db.insert(TABLE_USER, null, values);
@@ -105,7 +126,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_USER_ID,
                 COLUMN_USER_EMAIL,
                 COLUMN_USER_NAME,
-                COLUMN_USER_PASSWORD
+                COLUMN_USER_PASSWORD,
+                COLUMN_USER_BRANCH,
+                COLUMN_USER_SEMESTER,
+                COLUMN_USER_MOBILE,
+                COLUMN_USER_SCORE,
+                COLUMN_USER_TOP_SCORER,
+                COLUMN_USER_TOTAL_QUIZ
         };
 
 
@@ -209,12 +236,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_NAME, user.getName());
         values.put(COLUMN_USER_EMAIL, user.getEmail());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        values.put(COLUMN_USER_BRANCH, user.getBranch());
+        values.put(COLUMN_USER_SEMESTER, user.getSemester());
+        values.put(COLUMN_USER_MOBILE,user.getMobile_no());
+        values.put(COLUMN_USER_SCORE,user.getScore());
+        values.put(COLUMN_USER_TOP_SCORER,user.getTop_scorer());
+        values.put(COLUMN_USER_TOTAL_QUIZ,user.getTotal_quiz());
 
         // updating row
         db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(user.getId())});
         db.close();
     }
+
 
     public void updateFaculty(Faculty faculty) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -361,6 +395,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return false;
     }
+
+
+    public Cursor getSemester(String email, SQLiteDatabase db) {
+        Cursor cursor;
+        String[] projections = {COLUMN_USER_SEMESTER};
+        String selection = COLUMN_USER_EMAIL+" LIKE ?";
+        String[] selection_args={email};
+        cursor = db.query(TABLE_USER, projections, selection, selection_args, null, null, null);
+        return cursor;
+    }
+
+    public Cursor getBranch(String email, SQLiteDatabase db) {
+        Cursor cursor;
+        String[] projections = {COLUMN_USER_BRANCH};
+        String selection = COLUMN_USER_EMAIL+" LIKE ?";
+        String[] selection_args={email};
+        cursor = db.query(TABLE_USER, projections, selection, selection_args, null, null, null);
+        return cursor;
+    }
+
+    public Cursor getMobile(String email, SQLiteDatabase db) {
+        Cursor cursor;
+        String[] projections = {COLUMN_USER_MOBILE};
+        String selection = COLUMN_USER_EMAIL+" LIKE ?";
+        String[] selection_args={email};
+        cursor = db.query(TABLE_USER, projections, selection, selection_args, null, null, null);
+        return cursor;
+    }
+
+    public Cursor getInfo(String email, SQLiteDatabase sqLiteDatabase) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] projections = {COLUMN_USER_NAME,COLUMN_USER_MOBILE, COLUMN_USER_BRANCH, COLUMN_USER_SEMESTER, COLUMN_USER_TOTAL_QUIZ, COLUMN_USER_TOP_SCORER, COLUMN_USER_SCORE};
+        String selection = COLUMN_USER_EMAIL+" LIKE ?";
+        String[] seletion_args={email};
+        Cursor cursor=sqLiteDatabase.query(TABLE_USER,projections,selection,seletion_args,null,null,null);
+        return cursor;
+
+    }
+
+   /* public void updateScore(String email, SQLiteDatabase sqLiteDatabase,int score, int totalQuiz) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_USER_SCORE,score);
+        cv.put(COLUMN_USER_TOTAL_QUIZ,totalQuiz);
+        sqLiteDatabase.update(TABLE_USER,cv,COLUMN_USER_EMAIL+ "=" + email,null);
+
+    }*/
+
+
 
     public boolean checkFaculty(String email, String password) {
 

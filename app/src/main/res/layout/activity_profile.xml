@@ -30,7 +30,7 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/usericon" />
         <TextView
-            android:id="@+id/nameTextbox"
+            android:id="@+id/nameTextView"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
                     android:textSize="20sp"
                     />
                 <TextView
-                    android:id="@+id/totalQuizTextbox"
+                    android:id="@+id/totalQuizTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -86,7 +86,7 @@
                     android:textSize="20sp"
                     />
                 <TextView
-                    android:id="@+id/scoreTextbox"
+                    android:id="@+id/scoreTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -109,7 +109,7 @@
                     android:textSize="20sp"
                     />
                 <TextView
-                    android:id="@+id/topScorerTextbox"
+                    android:id="@+id/topScorerTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0 times"
@@ -140,7 +140,7 @@ android:layout_marginTop="45dp">
         android:layout_height="36dp"
         android:src="@drawable/ic_email_black_24dp"/>
     <TextView
-        android:id="@+id/emailTextbox"
+        android:id="@+id/emailTextView"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
@@ -159,7 +159,7 @@ android:layout_marginTop="45dp">
         android:layout_height="36dp"
         android:src="@drawable/ic_phone_black_24dp"/>
     <TextView
-        android:id="@+id/phoneNumberTextbox"
+        android:id="@+id/phoneNumberTextView"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
@@ -178,7 +178,7 @@ android:layout_marginTop="45dp">
         android:layout_height="36dp"
         android:src="@drawable/ic_school_calendar"/>
     <TextView
-        android:id="@+id/semesterTextbox"
+        android:id="@+id/semesterTextView"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
@@ -197,7 +197,7 @@ android:layout_marginTop="45dp">
         android:layout_height="36dp"
         android:src="@drawable/ic_mortarboard"/>
     <TextView
-        android:id="@+id/branchTextbox"
+        android:id="@+id/branchTextView"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
@@ -208,6 +208,7 @@ android:layout_marginTop="45dp">
 </LinearLayout>
 
 <Button
+    android:id="@+id/homeButton"
 android:textColor="#fff"
 android:background="@drawable/button_style"
 android:layout_marginTop="0dp"

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.Spinner;
 
 import com.project.studentfacultyportal.R;
 import com.project.studentfacultyportal.helpers.InputValidation;
@@ -23,6 +24,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
+    private TextInputLayout textInputLayout;
+
 
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextPassword;
@@ -36,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
         textViewLinkFacultyLogin = (AppCompatTextView) findViewById(R.id.textViewLinkFaculltyLogin);
         textViewLinkAdminLogin = (AppCompatTextView) findViewById(R.id.textViewLinkAdminLogin);
+
+
 
 
 

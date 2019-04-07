@@ -24,7 +24,7 @@ import com.project.studentfacultyportal.R;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class DocumentActivity extends AppCompatActivity {
-    Button downloadButton, uploadButton;
+    Button downloadButton, uploadButton, fetchButton;
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
     StorageReference ref;
@@ -37,6 +37,13 @@ public class DocumentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
         downloadButton = (Button) findViewById(R.id.downloadButton);
+        fetchButton = (Button) findViewById(R.id.fetchButton);
+        fetchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DocumentActivity.this,MyRecylerViewActivity.class));
+            }
+        });
         downloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
