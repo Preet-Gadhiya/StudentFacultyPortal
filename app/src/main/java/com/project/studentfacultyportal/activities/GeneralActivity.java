@@ -15,6 +15,8 @@ import com.project.studentfacultyportal.R;
 
 public class GeneralActivity extends AppCompatActivity implements View.OnClickListener {
     CardView homeCard, documentsCard, gamesCard, profileCard;
+    String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +40,22 @@ public class GeneralActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu,menu);
+        menuInflater.inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.settingsId : Log.i("Menu Item selected","Settings Pressed" );
+        switch (item.getItemId()) {
+            case R.id.logoutMenu:
+                Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(i);
+                return true;
 
-            case R.id.aboutId : Log.i("Menu Item selected", "About us"); return true;
+            case R.id.aboutMenu:
+                Log.i("Menu Item selected", "About us");
+                return true;
             default:
                 return false;
 
@@ -60,13 +67,30 @@ public class GeneralActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         Intent i;
-        switch (v.getId())
-        {
-            case R.id.homeCard : i = new Intent(this,WelcomeActivity.class); startActivity(i); break;
-            case R.id.documentsCard : i = new Intent(this,DocumentActivity .class); startActivity(i); break;
-            case R.id.gamesCard : i = new Intent(this,BrainTrainerQuizActivity.class); startActivity(i); break;
-            case R.id.profileCard : i = new Intent(this,ProfileActivity.class); startActivity(i); break;
-            default:break;
+        switch (v.getId()) {
+            case R.id.homeCard:
+                i = new Intent(this, WelcomeActivity.class);
+                startActivity(i);
+                break;
+            case R.id.documentsCard:
+                i = new Intent(this, DocumentActivity.class);
+                startActivity(i);
+                break;
+            case R.id.gamesCard:
+                i = new Intent(this, BrainTrainerQuizActivity.class);
+                 startActivity(i);
+                break;
+            case R.id.profileCard: {
+                i = new Intent(this, ProfileActivity.class);
+                Intent b = getIntent();
+                Bundle mail = b.getExtras();
+                email = (String) mail.get("EMAIL");
+                i.putExtra("EMAIL", email);
+                startActivity(i);
+                break;
+            }
+            default:
+                break;
         }
     }
 }

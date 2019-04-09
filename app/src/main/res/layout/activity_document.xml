@@ -4,18 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DocumentActivity">
+    tools:context=".activities.DocumentActivity"
+    android:background="@drawable/upload2">
 
-    <Button
+    <!--<Button
         android:id="@+id/downloadButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Download File" />
+        android:text="Download File"
+        android:background="@drawable/button2_style"/>
 
-    <Button
-        android:id="@+id/uploadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="File Upload" />
+        <Button
+            android:id="@+id/uploadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button2_style"
+            android:text="Upload Files" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/fetchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="299dp"
+            android:layout_marginLeft="150dp"
+            android:background="@drawable/button2_style"
+            android:text="View Files" />
+
+    </LinearLayout>
+
+
+
 </RelativeLayout>

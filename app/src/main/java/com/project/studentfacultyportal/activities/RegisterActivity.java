@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.Spinner;
 
 import com.project.studentfacultyportal.R;
 import com.project.studentfacultyportal.helpers.InputValidation;
@@ -25,11 +26,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
     private TextInputLayout textInputLayoutConfirmPassword;
+    private TextInputLayout textInputLayoutMobile;
+    private TextInputLayout textInputLayoutBranch;
+    private TextInputLayout textInputLayoutSemester;
+
 
     private TextInputEditText textInputEditTextName;
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextPassword;
     private TextInputEditText textInputEditTextConfirmPassword;
+    private TextInputEditText textInputEditTextMobile;
 
     private AppCompatButton appCompatButtonRegister;
     private AppCompatTextView appCompatTextViewLoginLink;
@@ -37,6 +43,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
     private User user;
+
+    private Spinner branchSpinner, semesterSpinner;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +77,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         appCompatButtonRegister = (AppCompatButton) findViewById(R.id.appCompatButtonRegister);
 
         appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
+        textInputEditTextMobile = (TextInputEditText) findViewById(R.id.textInputEditTextMobile);
+        branchSpinner = (Spinner) findViewById(R.id.branchSpinner);
+        semesterSpinner = (Spinner) findViewById(R.id.semesterSpinner);
 
     }
 
@@ -137,6 +148,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             user.setName(textInputEditTextName.getText().toString().trim());
             user.setEmail(textInputEditTextEmail.getText().toString().trim());
             user.setPassword(textInputEditTextPassword.getText().toString().trim());
+            user.setMobile_no(textInputEditTextMobile.getText().toString().trim());
+            user.setBranch(String.valueOf(branchSpinner.getSelectedItem()));
+            user.setSemester(String.valueOf(semesterSpinner.getSelectedItem()));
 
             databaseHelper.addUser(user);
 
@@ -161,5 +175,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         textInputEditTextEmail.setText(null);
         textInputEditTextPassword.setText(null);
         textInputEditTextConfirmPassword.setText(null);
+        textInputEditTextMobile.setText(null);
     }
 }

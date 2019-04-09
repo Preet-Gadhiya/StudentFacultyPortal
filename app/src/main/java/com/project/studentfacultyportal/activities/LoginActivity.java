@@ -1,6 +1,7 @@
 package com.project.studentfacultyportal.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.Spinner;
 
 import com.project.studentfacultyportal.R;
 import com.project.studentfacultyportal.helpers.InputValidation;
@@ -19,10 +21,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private final AppCompatActivity activity = LoginActivity.this;
 
+    public static final String PREFS_NAME = "LoginPrefs";
+
     private NestedScrollView nestedScrollView;
 
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
+    private TextInputLayout textInputLayout;
+
 
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextPassword;
@@ -38,10 +44,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private DatabaseHelper databaseHelper;
 
     @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
+
+//        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+
 
         initViews();
         initListeners();
@@ -66,6 +80,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
         textViewLinkFacultyLogin = (AppCompatTextView) findViewById(R.id.textViewLinkFaculltyLogin);
         textViewLinkAdminLogin = (AppCompatTextView) findViewById(R.id.textViewLinkAdminLogin);
+
+
 
 
 

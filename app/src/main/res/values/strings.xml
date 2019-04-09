@@ -28,5 +28,32 @@
     <string name="admin_login">Admin Login</string>
     <string name="user_login">Student Login</string>
     <string name="file_upload">File Upload</string>
+    <string name="hint_semester">Select Semester :</string>
+    <string name="hint_branch">Select Branch : </string>
+    <string name="branch_prompt">Choose a Branch</string>
+    <string name="semester_prompt">Select Semester</string>
+    <string name="hint_mobile">Mobile No.</string>
+
+
+    <string-array name="branch_array">
+        <item>Chemical</item>
+        <item>Civil</item>
+        <item>Computer</item>
+        <item>Electrical</item>
+        <item>Electronics</item>
+        <item>Mechanical</item>
+    </string-array>
+
+    <string-array name="semester_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string name="title_activity_list_files">ListFilesActivity</string>
 </resources>
 
