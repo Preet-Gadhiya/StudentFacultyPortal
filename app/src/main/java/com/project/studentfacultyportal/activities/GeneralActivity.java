@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.project.studentfacultyportal.R;
 
@@ -54,8 +55,8 @@ public class GeneralActivity extends AppCompatActivity implements View.OnClickLi
                 return true;
 
             case R.id.aboutMenu:
-                Log.i("Menu Item selected", "About us");
-                return true;
+                Toast.makeText(this, "We are Anonnymous! :)", Toast.LENGTH_SHORT).show();
+                    return true;
             default:
                 return false;
 

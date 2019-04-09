@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.studentfacultyportal.R;
 import com.project.studentfacultyportal.sql.DatabaseHelper;
@@ -83,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 Log.i("Menu Item selected", "Settings Pressed");
 
             case R.id.aboutMenu:
-                Log.i("Menu Item selected", "About us");
+                Toast.makeText(this, "We are Anonnymous! :)", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return false;
