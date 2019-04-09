@@ -24,7 +24,7 @@ import com.project.studentfacultyportal.R;
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class DocumentActivity extends AppCompatActivity {
-    Button downloadButton, uploadButton, fetchButton;
+    Button /*downloadButton, uploadButton,*/ fetchButton;
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
     StorageReference ref;
@@ -36,15 +36,15 @@ public class DocumentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
-        downloadButton = (Button) findViewById(R.id.downloadButton);
+//        downloadButton = (Button) findViewById(R.id.downloadButton);
         fetchButton = (Button) findViewById(R.id.fetchButton);
         fetchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DocumentActivity.this,MyRecylerViewActivity.class));
+                startActivity(new Intent(DocumentActivity.this,ListFilesActivity.class));
             }
         });
-        downloadButton.setOnClickListener(new View.OnClickListener() {
+       /* downloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 download();
@@ -57,7 +57,7 @@ public class DocumentActivity extends AppCompatActivity {
                intent = new Intent(DocumentActivity.this,FileUpload.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
 
 
@@ -74,9 +74,9 @@ public class DocumentActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.settingsId : Log.i("Menu Item selected","Settings Pressed" );
+            case R.id.logoutMenu : Log.i("Menu Item selected","Settings Pressed" );
 
-            case R.id.aboutId : Log.i("Menu Item selected", "About us"); return true;
+            case R.id.aboutMenu : Log.i("Menu Item selected", "About us"); return true;
             default:
                 return false;
 
@@ -84,7 +84,7 @@ public class DocumentActivity extends AppCompatActivity {
         }
 
     }
-    public void download() {
+   /* public void download() {
         storageReference = firebaseStorage.getInstance().getReference();
         ref=storageReference.child("Project_Proposal_Pooja_Vanvi.docx");
         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -111,5 +111,5 @@ public class DocumentActivity extends AppCompatActivity {
         request.setDestinationInExternalFilesDir(context,destinationDir,fileName + fileExtension);
         downloadManager.enqueue(request);
 
-    }
+    }*/
 }

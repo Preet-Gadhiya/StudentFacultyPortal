@@ -48,10 +48,12 @@ public class GeneralActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.settingsId:
-                Log.i("Menu Item selected", "Settings Pressed");
+            case R.id.logoutMenu:
+                Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(i);
+                return true;
 
-            case R.id.aboutId:
+            case R.id.aboutMenu:
                 Log.i("Menu Item selected", "About us");
                 return true;
             default:
@@ -76,7 +78,7 @@ public class GeneralActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.gamesCard:
                 i = new Intent(this, BrainTrainerQuizActivity.class);
-                startActivity(i);
+                 startActivity(i);
                 break;
             case R.id.profileCard: {
                 i = new Intent(this, ProfileActivity.class);

@@ -50,7 +50,22 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:weightSum="3">
-            <LinearLayout
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/marqueeTextView"
+                android:textColor="@color/colorGreen"
+                android:text="Dharmsinh Desai University, Nadiad"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:textSize="32sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="33dp"
+                android:layout_marginBottom="33dp"
+                android:padding="5dip"/>
+            <!--<LinearLayout
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -118,7 +133,7 @@
                     android:paddingTop="10dp"
                     android:textColor="@color/skyBlue"/>
 
-            </LinearLayout>
+            </LinearLayout>-->
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
@@ -207,14 +222,14 @@ android:layout_marginTop="45dp">
 </LinearLayout>
 </LinearLayout>
 
-<Button
-    android:id="@+id/homeButton"
-android:textColor="#fff"
-android:background="@drawable/button_style"
-android:layout_marginTop="0dp"
-android:layout_gravity="center_horizontal"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Home"/>
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/button_style"
+        android:text="Home"
+        android:textColor="#fff" />
 
     </LinearLayout>

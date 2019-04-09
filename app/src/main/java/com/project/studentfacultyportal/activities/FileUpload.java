@@ -98,9 +98,11 @@ public class FileUpload extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                             String url = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(); // path of file
-                            //Toast.makeText(FileUpload.this, url, Toast.LENGTH_SHORT).show();
-                            DatabaseReference reference = database.getReference().child("urls");
-                            reference.child(fileName).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            Toast.makeText(FileUpload.this, fileName, Toast.LENGTH_SHORT).show();
+                            DatabaseReference reference = database.getReference("urls");
+                            //reference.child(fileName).setValue(url)
+                                reference.setValue(url)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful())
