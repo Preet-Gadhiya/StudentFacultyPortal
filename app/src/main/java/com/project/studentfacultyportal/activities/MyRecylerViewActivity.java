@@ -25,7 +25,7 @@ public class MyRecylerViewActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_recycler_view);
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("urls");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
