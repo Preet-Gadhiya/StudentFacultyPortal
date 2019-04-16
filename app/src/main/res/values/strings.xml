@@ -55,5 +55,6 @@
         <item>8</item>
     </string-array>
     <string name="title_activity_list_files">ListFilesActivity</string>
+    <string name="title_activity_demo_database">DemoDatabaseActivity</string>
 </resources>
 

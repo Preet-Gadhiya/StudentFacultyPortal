@@ -41,7 +41,7 @@ public class DocumentActivity extends AppCompatActivity {
         fetchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DocumentActivity.this,ListFilesActivity.class));
+                startActivity(new Intent(DocumentActivity.this,MyRecylerViewActivity.class));
             }
         });
        /* downloadButton.setOnClickListener(new View.OnClickListener() {
